@@ -113,7 +113,7 @@ TODO: add the stuff here
 	sudo nano /etc/monit/monitrc
 
 ## Configure monit
-Configure monit to your taste - we added the ability to monitor a pid file in /var/your_node_project/run/your_node_project.pid and server logs in /var/log/your_node_project.log
+Configure monit to your taste - we added the ability to monitor a pid file in /var/your_node_project/run/your_node_project.pid and server logs in /var/log/your_node_project.log (like this...)
 
 	check process node with pidfile /var/your_node_project/run/your_node_project.pid
         start = "/sbin/start your_node_project"
