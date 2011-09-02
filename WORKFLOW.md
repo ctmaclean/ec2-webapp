@@ -1,11 +1,10 @@
 ##TL;DR for building your node server...
 
-
 ## 1) hack locally and push to your github repo
-ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update
+`ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update`
 
 ## 2) hack on your server, change code locally to fix bugs, push to github repo, stash/rollback server changes  (really not recommended)
-ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update
+`ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update`
 
 ##Detailed instructions
 
@@ -63,7 +62,7 @@ Example:
 
     cd /var/your_node_project
     # hack hack hack
-    sudo invoke-rc.d your_node_project-httpd restart
+    sudo initctl your_node_project restart
     # it probably works, let's have a beer and relax
 
-> Note: Next time you want to run your update script you'll have to either stash or revert your changes for update to run.  To do that - 'git -- checkout master' [TODO: Confirm this is the exact command], then run the update script.
+> Note: Next time you want to run your update script you'll have to either stash or revert your changes for update to run.  To do that - `git -- checkout master` [TODO: Confirm this is the exact command], then run the update script.
