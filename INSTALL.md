@@ -108,23 +108,22 @@ If your git repository is private:
 
 TODO: add the stuff here
 
-## Install monit Monit
-sudo apt-get install monit
-sudo nano /etc/monit/monitrc
+## Install  [Monit](http://mmonit.com/monit/)
+	sudo apt-get install monit
+	sudo nano /etc/monit/monitrc
 
 ## Configure monit
-#config the file to your taste including monitoring a pid file in /var/your_node_project/run/your_node_project.pid and your log in  
-#/var/log/your_node_project.log
+Configure monit to your taste - we added the ability to monitor a pid file in /var/your_node_project/run/your_node_project.pid and server logs in /var/log/your_node_project.log
 
-check process node with pidfile /var/your_node_project/run/your_node_project.pid
+	check process node with pidfile /var/your_node_project/run/your_node_project.pid
         start = "/sbin/start your_node_project"
         stop = "/sbin/start stop your_node_project"
 
-    if changed pid then alert
-    if 5 restarts within 5 cycles then timeout
+    	if changed pid then alert
+    	if 5 restarts within 5 cycles then timeout
 
-check file log with path /var/log/your_node_project.log
-	if timestamp > 60 seconds then alert
+	check file log with path /var/log/your_node_project.log
+		if timestamp > 60 seconds then alert
 
 #confirm your config is good
 
