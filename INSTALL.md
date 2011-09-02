@@ -1,9 +1,11 @@
 ##TL;DR for building your node server...
 
-## make sure you've got
+## Make sure you've got
 	a `config.js` file in a `config` directory in your your_node_project directory 
-	a copy of the `your_nod_project.conf` file in a `init_scripts` directory in your your_node_project_here directory
-	a copy of the `update` script in your your_node_project_here directory
+	a copy of the `your_nod_project.conf` file in a `init_scripts` directory in your your_node_project directory
+	a copy of the `update` script in your your_node_project directory
+	
+	Then replace your_nod_project references with the name of your app & the your_account_here references with your github id.
 
 ## Roll an Ubuntu 10.04 LTS Lucid (EBS Boot) on EC2 then run...
 
@@ -46,6 +48,8 @@ If all checks out...
 
 First of all, make a clone or [fork of this repository](http://help.github.com/fork-a-repo/) and replace all occurrences of `your_node_project` with a name you want to refer to your project with throughout the server.  Also replace `your_account_here` with your account name from github.
 
+Second ensure you have a `config.js` file in a `config` directory in your your_node_project directory, a copy of the `your_nod_project.conf` file in a `init_scripts` directory in your your_node_project directory, and a copy of the `update` script in your your_node_project directory.  Our style of config relies on these three files.
+
 ## Launch an EC2 instance
 
 [Start a "micro" Amazon EC2 instance](https://console.aws.amazon.com/ec2/home) and use one of the following AMIs, depending on where you chose to launch it:
@@ -59,6 +63,8 @@ AP SouthEast 1: `ami-4af18918`
 AP NorthEast 1: 'ami-34d36635'
 
 Go with the defaults in the "wizard" presented. Chose to create a new key pair when asked and **be sure to make a secure backup of the private key** that you will download. A good place to put your private key is in `~/.ssh/myapp.pem` and then `chmod 0600 ~/.ssh/myapp.pem` so no one else can read it but you.
+
+Optional:  We use an upload of the config.js file in our /config directory to configure some app settings at runtime.  It's optional, but you may have to tweak scripts a bit.
 
 When the instance is green and "started", log in to the machine:
 
