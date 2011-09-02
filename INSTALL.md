@@ -130,7 +130,7 @@ Configure monit to your taste - we added the ability to monitor a pid file in /v
 	check file log with path /var/log/your_node_project.log
 		if timestamp > 60 seconds then alert
 
-#confirm your config is good
+#Confirm your monit config is good
 
 sudo monit -t
 
