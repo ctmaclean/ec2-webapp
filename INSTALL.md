@@ -1,6 +1,6 @@
-#****  TL;DR for building your node server...******
+#TL;DR for building your node server...
 
-##**Roll an Ubuntu 10.04 LTS Lucid (EBS Boot) on EC2**
+##Roll an Ubuntu 10.04 LTS Lucid (EBS Boot) on EC2
 
 sudo apt-get update
 sudo chown -R www-data:www-data /var/www
@@ -33,7 +33,7 @@ sudo reboot
 
 
 
-#******Detailed instructions**********
+#Detailed instructions
 
 # Setup and installation
 
