@@ -1,5 +1,10 @@
 ##TL;DR for building your node server...
 
+## make sure you've got
+	a `config.js` file in a `config` directory in your your_node_project directory 
+	a copy of the `your_nod_project.conf` file in a `init_scripts` directory in your your_node_project_here directory
+	a copy of the `update` script in your your_node_project_here directory
+
 ## Roll an Ubuntu 10.04 LTS Lucid (EBS Boot) on EC2 then run...
 
 	sudo apt-get update
@@ -16,16 +21,16 @@
 	sudo true && curl http://npmjs.org/install.sh | sudo sh
 	sudo mkdir /var/your_node_project
 	sudo chown www-data:www-data /var/your_node_project
-	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
+	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project.git /var/your_node_project
 	sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
 	sudo cat /var/www/.ssh/id_rsa.pub
 	
-Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project_here/admin
+Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project/admin
 
-	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
-	sudo chmod ugo+x /var/your_node_project_here/update
-	sudo /var/your_node_project_here/update
-	sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project_here
+	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project.git /var/your_node_project
+	sudo chmod ugo+x /var/your_node_project/update
+	sudo /var/your_node_project/update
+	sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project
 	sudo apt-get install monit
 	sudo nano /etc/monit/monitrc
 	
@@ -95,14 +100,14 @@ NPM:
 
 If your git repository is public (i.e. viewable by anyone):
 
-    sudo -Hu www-data git clone https://github.com/your_account_here/your_node_project_here.git /var/your_node_project
+    sudo -Hu www-data git clone https://github.com/your_account_here/your_node_project.git /var/your_node_project
 
 If your git repository is private:
 
     sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
     sudo cat /var/www/.ssh/id_rsa.pub
     # Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project/admin
-    sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project
+    sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project.git /var/your_node_project
 
 ## Configure upstart
 
