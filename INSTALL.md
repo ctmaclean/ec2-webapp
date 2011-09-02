@@ -29,8 +29,6 @@ Add the key as a "deploy key" at https://github.com/your_account_here/your_node_
 
 	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project.git /var/your_node_project
 	sudo chmod ugo+x /var/your_node_project/update
-	sudo /var/your_node_project/update
-	sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project
 	sudo apt-get install monit
 	sudo nano /etc/monit/monitrc
 	
@@ -111,14 +109,20 @@ If your git repository is private:
 
 ## Configure upstart
 
-TODO: add the stuff here
+When you run the update script the project moves the your_node_project.conf files into /etc/init
+
+	sudo /var/your_node_project/update
+
+Create a symlink for upstart
+
+	sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project 
 
 ## Install  [Monit](http://mmonit.com/monit/)
 	sudo apt-get install monit
 	sudo nano /etc/monit/monitrc
 
 ## Configure monit
-Configure monit to your taste - we added the ability to monitor a pid file in /var/your_node_project/run/your_node_project.pid and server logs in /var/log/your_node_project.log (like this...)
+Configure monit to your taste - we added the ability to monitor a pid file in /var/your_node_project/run/your_node_project.pid and server logs in /var/log/your_node_project.log (for example like this...)
 
 	check process node with pidfile /var/your_node_project/run/your_node_project.pid
         start = "/sbin/start your_node_project"
