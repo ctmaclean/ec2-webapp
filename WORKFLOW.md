@@ -1,15 +1,15 @@
 ##TL;DR for building your node server...
 
 
-# 1) hack locally and push to your github repo
+## 1) hack locally and push to your github repo
 ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update
 
-# 2) hack on your server, change code locally to fix bugs, push to github repo, stash/rollback server changes  (really not recommended)
+## 2) hack on your server, change code locally to fix bugs, push to github repo, stash/rollback server changes  (really not recommended)
 ssh -i ~/.ssh/your_node_project.pem ubuntu@your_node_project.com:/var/your_node_project/update
 
 ##Detailed instructions
 
-# Workflow
+## Workflow
 
 Here we outline two different workflows -- how to hack on and deploy your app.
 
