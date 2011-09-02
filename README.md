@@ -1,23 +1,21 @@
-# EC2 web app template
+# EC2 web app template modified from rsms/ec2-webapp (and using the excellent project layout)
 
-This is a template I use to quickly set up Node.js-backed web apps on Amazon EC2
+This is a template we use at Cardinal as a base for our Node.js EC2 servers.  More web services focused then the original project (pretty damn slim actually)
 
+As with the (excellent) original:
 - Less than 15 minutes from start to finish
-- Eligible/compatible with the ["AWS Free Usage Tier"](http://aws.amazon.com/free/)
+- Eligible/compatible with the ["AWS Free Usage Tier"](http://aws.amazon.com/free/) (Highly recommended with Node - so damn cheap!)
 - Ubuntu Linux
-- High-performance Nginx HTTP server
-  - Sensible default configuration (three flavors to chose from)
-  - Automatically handles all static file requests
-  - Delegates non-static requests to the Node.js web server
 - Git-based deployment
-- Init.d scripts
 
-This template enables a very smooth, simple and scalable workflow
+Tweaked out a bit:
+- Modified to use Upstart as per a bit more current initialization of services in Ubuntu
+- Modified node to produce a .pid file for monit to keep an eye on
+- Added monit to allow for monitoring and restart of app
+- modified scripts to use a (rudimentary) version of Amazon's [wtf is it called scripts passed on startup]
+- stripped out a lot of the scripting that didn't apply to our useage.
+- removed nginx (we don't server any static files - we only consume data)
 
-- When developing locally, the single command `bin/myapp-httpd.mv` runs your web server and takes care of serving static files
-- When deploying changes (after a git push), `myapp-update restart` deploys changes and restarts services on your server
-- Rolling back the server to an earlier version is a simple as `myapp-update restart v0.1.2`
+This template (still) enables a very smooth, simple workflow but is more intended as a base server to be imaged for 1+n failover servers
 
-> Here's a guide on getting started with Amazon EC2: <http://rsms.me/2011/03/23/ec2-wep-app-template.html>
-
-**Let's get started!** Head over to [INSTALL.md](https://github.com/rsms/ec2-webapp/blob/master/INSTALL.md#readme)
+**Aight.  Lets start ** Head over to [INSTALL.md](https://github.com/ctmaclean/ec2-webapp/blob/master/INSTALL.md#readme)

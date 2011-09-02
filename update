@@ -10,19 +10,69 @@
 #
 # If <refspec> is not given, no "git checkout" is performed thus you get the
 # latest version of whatever branch you are currently at.
+##!/bin/bash
+#
+# Usage: update [restart|noop [<refspec>]]
+#
+# Examples:
+# update # deploy latest
+# update restart # deploy latest and restart services
+# update restart v1.2.3 # deploy ref "v1.2.3" and restart services
+# update noop v1.2.3 # deploy ref "v1.2.3"
+#
+# If <refspec> is not given, no "git checkout" is performed thus you get the
+# latest version of whatever branch you are currently at.
 #
 if [ "$(whoami)" != "root" ]; then
-  sudo $0 $@
+sudo $0 $@
   exit $?
 fi
+
 cd "$(dirname "$0")"
+echo "BAM - getting changes to our project...."
 sudo -Hu www-data git pull origin master || exit $?
+
 if [ "$2" != "" ]; then
-  sudo -Hu www-data git checkout "$2" || exit $?
+echo "BAM - getting changes to our project...."	
+	sudo -Hu www-data git checkout "$2" || exit $?
 fi
+
 sudo -Hu www-data git submodule update --init
 
+#install our custom or 'must be compiled server side' libraries
+echo "Looks like we have to install some extra libraries..ok...doing that..."
+cd /var/your_node_project
+sudo npm install your_library
+
+echo "Done with the libraries..cool..."
+
+#set up logging if it doesn't exist - no logic around it right now really but... - later later
+echo "Lets make sure our logging is set up in /var/log/your_node_project.log and has permissions"
+sudo touch /var/log/your_node_project.log
+sudo chown www-data:www-data /var/log/your_node_project.log
+sudo chmod ugo+rwx /var/log/your_node_project.log
+echo "Ok - done that.  Now lets make sure update has execute permissions so we can keep running it..."
+sudo chmod ugo+x /var/your_node_project/update
+echo "Ok..done that too...."
+echo "making our run directory..."
+sudo mkdir /var/your_node_project/run/
+echo "done...now lets get permissions set on it..."
+sudo chown www-data:www-data /var/your_node_project/run/
+
+#move our new configuration into the init directory so it will auto start using upstart
+echo "Moving our init/your_node_project.conf file into /etc/init to make sure we have an up to date startup script..."
+sudo cp /var/your_node_project/init/your_node_project.conf /etc/init
+echo "Ok...done that too!"
+
+#we use this to pull down our app config file that you pass in on starting an AMI image - you may not need too....
+echo "Run these now...(optional)"
+echo "sudo curl -o /var/your_node_project/config/config.js http://169.254.169.254/latest/user-data"
+echo "sudo chown www-data:www-data /var/your_node_project/config/config.js"
+echo "sudo chmod ug+r /var/your_node_project/config/config.js"
+
 if [ "$1" == "restart" ]; then
-  [ -f /etc/init.d/myapp-httpd ] && invoke-rc.d myapp-httpd restart
-  [ -f /etc/init.d/myapp-processor ] && invoke-rc.d myapp-processor restart
+  echo "Last task is to do the restart....bye!"
+  #tell upstart to start and stop our server
+  sudo stop your_node_project
+  sudo start your_node_project
 fi
