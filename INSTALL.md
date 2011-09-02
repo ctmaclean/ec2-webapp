@@ -2,34 +2,34 @@
 
 ##Roll an Ubuntu 10.04 LTS Lucid (EBS Boot) on EC2
 
--sudo apt-get update
--sudo chown -R www-data:www-data /var/www
--sudo apt-get install build-essential libssl-dev
--cd
--mkdir src
--git clone https://github.com/joyent/node.git src/node
--cd src/node
--git checkout v0.4.10
--./configure
--JOBS=2 make
--sudo make install
--sudo true && curl http://npmjs.org/install.sh | sudo sh
--sudo mkdir /var/your_node_project
--sudo chown www-data:www-data /var/your_node_project
--sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
--sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
--sudo cat /var/www/.ssh/id_rsa.pub
--# Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project_here/admin
--sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
--sudo chmod ugo+x /var/your_node_project_here/update
--sudo /var/your_node_project_here/update
--sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project_here
--sudo apt-get install monit
--sudo nano /etc/monit/monitrc
--#config the file to your taste including monitoring a pid file in /var/your_node_project/run/your_node_project.pid
--sudo monit -t
--#if all checks out...
--sudo reboot
+- sudo apt-get update
+- sudo chown -R www-data:www-data /var/www
+- sudo apt-get install build-essential libssl-dev
+- cd
+- mkdir src
+- git clone https://github.com/joyent/node.git src/node
+- cd src/node
+- git checkout v0.4.10
+- ./configure
+- JOBS=2 make
+- sudo make install
+- sudo true && curl http://npmjs.org/install.sh | sudo sh
+- sudo mkdir /var/your_node_project
+- sudo chown www-data:www-data /var/your_node_project
+- sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
+- sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
+- sudo cat /var/www/.ssh/id_rsa.pub
+- # Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project_here/admin
+- sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
+- sudo chmod ugo+x /var/your_node_project_here/update
+- sudo /var/your_node_project_here/update
+- sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project_here
+- sudo apt-get install monit
+- sudo nano /etc/monit/monitrc
+- #config the file to your taste including monitoring a pid file in /var/your_node_project/run/your_node_project.pid
+- sudo monit -t
+- #if all checks out...
+- sudo reboot
 
 #Detailed instructions
 
