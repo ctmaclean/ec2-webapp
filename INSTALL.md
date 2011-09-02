@@ -19,16 +19,16 @@
 	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
 	sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
 	sudo cat /var/www/.ssh/id_rsa.pub
-# Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project_here/admin
+Add the key as a "deploy key" at https://github.com/your_account_here/your_node_project_here/admin
 	sudo -Hu www-data git clone git@github.com:your_account_here/your_node_project_here.git /var/your_node_project_here
 	sudo chmod ugo+x /var/your_node_project_here/update
 	sudo /var/your_node_project_here/update
 	sudo ln -s /lib/init/upstart-job /etc/init.d/your_node_project_here
 	sudo apt-get install monit
 	sudo nano /etc/monit/monitrc
-# Config the file to your taste including monitoring a pid file in /var/your_node_project/run/your_node_project.pid
+Config the file to your taste including monitoring a pid file in /var/your_node_project/run/your_node_project.pid
 	sudo monit -t
-# If all checks out...
+If all checks out...
 	sudo reboot
 
 #Detailed instructions
